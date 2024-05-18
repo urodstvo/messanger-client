@@ -1,0 +1,46 @@
+{
+    "chats": [
+        {
+            "id": 1,
+            "name": "Chat 1",
+            "avatar": "https://i.pravatar.cc/300",
+            "last_message": "Hello, how are you?"
+        },
+        {
+            "id": 2,
+            "name": "Chat 2",
+            "avatar": "https://i.pravatar.cc/301",
+            "last_message": "Hello, how are you?"
+        },
+        {
+            "id": 3,
+            "name": "Chat 3",
+            "avatar": "https://i.pravatar.cc/302",
+            "last_message": "Hello, how are you?"
+        },
+        {
+            "id": 4,
+            "name": "Chat 4",
+            "avatar": "https://i.pravatar.cc/303",
+            "last_message": "Hey, whats up? What you doing?"
+        },
+        {
+            "id": 5,
+            "name": "Chat 5",
+            "avatar": "https://i.pravatar.cc/304",
+            "last_message": "Hey, whats up? What you doing?"
+        },
+        {
+            "id": 6,
+            "name": "Chat 6",
+            "avatar": "https://i.pravatar.cc/305",
+            "last_message": "Hey, whats up? What you doing?"
+        },
+        {
+            "id": 7,
+            "name": "Chat 7",
+            "avatar": "https://i.pravatar.cc/306",
+            "last_message": "Hey, whats up? What you doing?"
+        }
+    ]
+}

@@ -5,10 +5,116 @@
 :root {
     --page-padding-default: 40px;
     --page-padding-small: 10px;
+
+    --right-column-translate: 100vw;
+    --right-column-width: 100%;
+
+    --left-column-width: 400px;
+
+    --middle-column-max-width: 100vw;
+
+    @media screen(sm) {
+        & {
+            --right-column-width: 360px;
+            --right-column-translate: var(--right-column-width);
+        }
+    }
+
+    @media screen(xl) {
+        & {
+            --middle-column-max-width: calc(100vw - var(--left-column-width));
+        }
+    }
 }
 
 html {
     &.light {
         background: linear-gradient(to bottom, #e5e5e5 0%, #ffffff 100%);
+    }
+}
+
+@layer components {
+    #columns {
+        @apply grid grid-cols-1 grid-rows-1 min-h-screen max-h-screen w-full overflow-hidden relative;
+
+        &.left-column-shown > #middle-column {
+            @apply translate-x-[100vw];
+        }
+
+        &.chat-shown > #left-column {
+            @apply -translate-x-[20vw];
+        }
+
+        &.right-column-shown > #right-column {
+            @apply translate-x-0;
+        }
+
+        @media screen(sm) {
+            & {
+                @apply flex;
+
+                &.left-column-shown {
+                    & > #left-column {
+                        @apply min-w-[380px] max-w-[--left-column-width];
+                    }
+
+                    & > #middle-column {
+                        @apply min-w-[500px] translate-x-0;
+                    }
+
+                    & > #right-column {
+                        @apply translate-x-[--right-column-translate];
+                    }
+                }
+            }
+        }
+
+        @media screen(xl) {
+            &.right-column-shown {
+                & > #middle-column {
+                    --middle-column-max-width: calc(100vw - var(--left-column-width) - var(--right-column-width));
+                }
+
+                & > #right-column {
+                    @apply translate-x-0;
+                }
+            }
+        }
+
+        & > #left-column {
+            @apply row-start-1 col-start-1 p-[--page-padding-small] bg-white border w-full flex overflow-hidden transition-all min-w-0;
+
+            @media screen(sm) {
+                & {
+                    @apply flex-1 max-w-[100px] !translate-x-0;
+                }
+            }
+
+            @media screen(lg) {
+                & {
+                    @apply max-w-[--left-column-width];
+                }
+            }
+        }
+
+        & > #middle-column {
+            @apply row-start-1 col-start-1 p-[--page-padding-small] bg-white border z-[1] flex overflow-hidden transition-all w-full max-w-[--middle-column-max-width];
+
+            @media screen(sm) {
+                & {
+                    @apply translate-x-0 flex-1;
+                }
+            }
+        }
+
+        & > #right-column {
+            @apply translate-x-[--right-column-translate] row-start-1 z-[3] col-start-1 p-[--page-padding-small] bg-white w-[--right-column-width] border flex overflow-hidden transition;
+
+            @media screen(sm) {
+                & {
+                    @apply absolute end-0 min-h-full max-h-full h-full;
+                }
+            }
+        }
     }
 }
