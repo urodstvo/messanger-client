@@ -86,7 +86,7 @@ html {
 
             @media screen(sm) {
                 & {
-                    @apply flex-1 max-w-[100px] !translate-x-0;
+                    @apply flex-1 max-w-[80px] !translate-x-0;
                 }
             }
 
@@ -98,7 +98,7 @@ html {
         }
 
         & > #middle-column {
-            @apply row-start-1 col-start-1 p-[--page-padding-small] bg-white border z-[1] flex overflow-hidden transition-all w-full max-w-[--middle-column-max-width];
+            @apply row-start-1 col-start-1 p-[--page-padding-small] bg-zinc-100 border z-[1] flex overflow-hidden transition-all w-full max-w-[--middle-column-max-width];
 
             @media screen(sm) {
                 & {
@@ -112,9 +112,25 @@ html {
 
             @media screen(sm) {
                 & {
-                    @apply absolute end-0 min-h-full max-h-full h-full;
+                    @apply absolute end-0 min-h-full max-h-full h-full shadow-[-100px_0_100px_rgba(0,0,0,0.1)];
                 }
             }
+
+            @media screen(xl) {
+                & {
+                    @apply shadow-none;
+                }
+            }
+        }
+    }
+}
+
+@layer utilities {
+    .no-scrollbar {
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
         }
     }
 }

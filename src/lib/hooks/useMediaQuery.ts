@@ -1,19 +1,20 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
-var getMatches = function (mediaQuery: string) {
+const getMatches = function (mediaQuery: string) {
     if (typeof window === 'undefined' || typeof window.matchMedia === 'undefined') {
         return false;
     }
     return window.matchMedia(mediaQuery).matches;
 };
+
 export const useMediaQuery = (query: string) => {
     const [matches, setMatches] = useState(getMatches(query));
 
-    const handleChange = useCallback((e: MediaQueryListEvent) => {
-        setMatches(e.matches);
-    }, []);
-
     useEffect(() => {
+        const handleChange = (e: MediaQueryListEvent) => {
+            setMatches(e.matches);
+        };
+
         if (typeof window === 'undefined' || typeof window.matchMedia === 'undefined') {
             return;
         }
@@ -24,6 +25,7 @@ export const useMediaQuery = (query: string) => {
         return () => {
             mediaQueryList.removeEventListener('change', handleChange);
         };
-    }, [query, handleChange]);
+    }, [query]);
+
     return matches;
 };

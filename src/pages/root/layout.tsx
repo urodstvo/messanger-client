@@ -1,43 +1,61 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { Sidebar } from './components/Sidebar';
 import clsx from 'clsx';
 import { useLayoutStore } from '@/store/layoutStore';
 import { useMediaQuery } from '@/lib/hooks';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
+import { ChatInfoSection } from './components/ChatInfo';
 
-export const RootLayout = () => {
+const useBackToRootEffect = () => {
     const navigate = useNavigate();
+    const params = useParams();
+    const isOnRootPath = useMemo(() => params.chatId === undefined, [params]);
 
-    const layoutStore = useLayoutStore();
+    const { isRightColumnShown, isMiddleColumnShown, toggleMiddleColumn, toggleRightColumn } = useLayoutStore();
 
-    const isLarge = useMediaQuery('(min-width: 1024px)');
-
-    useEffect(() => {
-        if (!isLarge && layoutStore.isMiddleColumnShown && layoutStore.isLeftColumnShown)
-            layoutStore.toggleMiddleColumn();
-        if (isLarge && !layoutStore.isMiddleColumnShown) layoutStore.toggleMiddleColumn();
-    }, [isLarge]);
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = useCallback(
+        (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
-                navigate('/');
+                if (isRightColumnShown) toggleRightColumn();
+                if (isMiddleColumnShown) toggleMiddleColumn();
+                if (!isOnRootPath) navigate('/');
             }
-        };
+        },
+        [isRightColumnShown, isOnRootPath],
+    );
 
+    useEffect(() => {
         document.documentElement.addEventListener('keydown', handleKeyDown);
 
         return () => {
             document.documentElement.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [handleKeyDown]);
+};
+
+const useMediaDesktopEffect = () => {
+    const { isMiddleColumnShown, isLeftColumnShown, toggleMiddleColumn } = useLayoutStore();
+
+    const isDesktop = useMediaQuery('(min-width: 1024px)');
+
+    useEffect(() => {
+        if ((!isDesktop && isMiddleColumnShown && isLeftColumnShown) || (isDesktop && !isMiddleColumnShown))
+            toggleMiddleColumn();
+    }, [isDesktop, isMiddleColumnShown, isLeftColumnShown]);
+};
+
+export const RootLayout = () => {
+    const { isLeftColumnShown, isMiddleColumnShown, isRightColumnShown } = useLayoutStore();
+
+    useBackToRootEffect();
+    useMediaDesktopEffect();
 
     return (
         <div
             className={clsx({
-                'left-column-shown': layoutStore.isLeftColumnShown,
-                'chat-shown': layoutStore.isMiddleColumnShown,
-                'right-column-shown': layoutStore.isRightColumnShown,
+                'left-column-shown': isLeftColumnShown,
+                'chat-shown': isMiddleColumnShown,
+                'right-column-shown': isRightColumnShown,
             })}
             id="columns"
         >
@@ -47,18 +65,9 @@ export const RootLayout = () => {
             <main id="middle-column">
                 <Outlet />
             </main>
-            <div id="right-column">
-                <section>
-                    <button
-                        className="px-5 py-2 bg-blue-400 rounded"
-                        onClick={() => {
-                            layoutStore.toggleRightColumn();
-                        }}
-                    >
-                        back
-                    </button>
-                </section>
-            </div>
+            <article id="right-column">
+                <ChatInfoSection />
+            </article>
         </div>
     );
 };
