@@ -7,9 +7,11 @@ type State = {
 };
 
 type Actions = {
-    toggleLeftColumn: () => void;
-    toggleMiddleColumn: () => void;
-    toggleRightColumn: () => void;
+    actions: {
+        toggleLeftColumn: () => void;
+        toggleMiddleColumn: () => void;
+        toggleRightColumn: () => void;
+    };
 };
 
 const initialState: State = {
@@ -20,7 +22,9 @@ const initialState: State = {
 
 export const useLayoutStore = create<State & Actions>((set) => ({
     ...initialState,
-    toggleLeftColumn: () => set((state) => ({ isLeftColumnShown: !state.isLeftColumnShown })),
-    toggleMiddleColumn: () => set((state) => ({ isMiddleColumnShown: !state.isMiddleColumnShown })),
-    toggleRightColumn: () => set((state) => ({ isRightColumnShown: !state.isRightColumnShown })),
+    actions: {
+        toggleLeftColumn: () => set((state) => ({ isLeftColumnShown: !state.isLeftColumnShown })),
+        toggleMiddleColumn: () => set((state) => ({ isMiddleColumnShown: !state.isMiddleColumnShown })),
+        toggleRightColumn: () => set((state) => ({ isRightColumnShown: !state.isRightColumnShown })),
+    },
 }));

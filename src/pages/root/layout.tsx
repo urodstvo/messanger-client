@@ -1,27 +1,35 @@
+import { useCallback, useEffect } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { Sidebar } from './components/Sidebar';
 import clsx from 'clsx';
+import { useShallow } from 'zustand/react/shallow';
+
 import { useLayoutStore } from '@/store/layoutStore';
 import { useMediaQuery } from '@/lib/hooks';
-import { useCallback, useEffect, useMemo } from 'react';
+
+import { Sidebar } from './components/Sidebar';
 import { ChatInfoSection } from './components/ChatInfo';
 
 const useBackToRootEffect = () => {
     const navigate = useNavigate();
     const params = useParams();
-    const isOnRootPath = useMemo(() => params.chatId === undefined, [params]);
 
-    const { isRightColumnShown, isMiddleColumnShown, toggleMiddleColumn, toggleRightColumn } = useLayoutStore();
+    const { isRightColumnShown, isMiddleColumnShown } = useLayoutStore(
+        useShallow((state) => ({
+            isRightColumnShown: state.isRightColumnShown,
+            isMiddleColumnShown: state.isMiddleColumnShown,
+        })),
+    );
+    const { toggleMiddleColumn, toggleRightColumn } = useLayoutStore((state) => state.actions);
 
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 if (isRightColumnShown) toggleRightColumn();
                 if (isMiddleColumnShown) toggleMiddleColumn();
-                if (!isOnRootPath) navigate('/');
+                if (params.chatId !== undefined) navigate('/');
             }
         },
-        [isRightColumnShown, isOnRootPath],
+        [isRightColumnShown, params],
     );
 
     useEffect(() => {
@@ -34,7 +42,13 @@ const useBackToRootEffect = () => {
 };
 
 const useMediaDesktopEffect = () => {
-    const { isMiddleColumnShown, isLeftColumnShown, toggleMiddleColumn } = useLayoutStore();
+    const { isMiddleColumnShown, isLeftColumnShown } = useLayoutStore(
+        useShallow((state) => ({
+            isMiddleColumnShown: state.isMiddleColumnShown,
+            isLeftColumnShown: state.isLeftColumnShown,
+        })),
+    );
+    const { toggleMiddleColumn } = useLayoutStore((state) => state.actions);
 
     const isDesktop = useMediaQuery('(min-width: 1024px)');
 
@@ -45,10 +59,27 @@ const useMediaDesktopEffect = () => {
 };
 
 export const RootLayout = () => {
-    const { isLeftColumnShown, isMiddleColumnShown, isRightColumnShown } = useLayoutStore();
+    const { isLeftColumnShown, isMiddleColumnShown, isRightColumnShown } = useLayoutStore(
+        useShallow((state) => ({
+            isLeftColumnShown: state.isLeftColumnShown,
+            isMiddleColumnShown: state.isMiddleColumnShown,
+            isRightColumnShown: state.isRightColumnShown,
+        })),
+    );
+    const { toggleLeftColumn, toggleMiddleColumn, toggleRightColumn } = useLayoutStore((state) => state.actions);
 
     useBackToRootEffect();
     useMediaDesktopEffect();
+
+    const isTablet = useMediaQuery('(min-width: 640px) and (max-width: 1279px)');
+
+    const onSelectMiddleColumn = useCallback(() => {
+        if (isRightColumnShown && !isLeftColumnShown) toggleRightColumn();
+        else {
+            toggleMiddleColumn();
+            toggleLeftColumn();
+        }
+    }, [isRightColumnShown, isLeftColumnShown]);
 
     return (
         <div
@@ -62,7 +93,10 @@ export const RootLayout = () => {
             <aside id="left-column">
                 <Sidebar />
             </aside>
-            <main id="middle-column">
+            <main id="middle-column" className="relative">
+                {isTablet && (isLeftColumnShown || isRightColumnShown) && (
+                    <div className="absolute inset-0 z-10" onClick={onSelectMiddleColumn} />
+                )}
                 <Outlet />
             </main>
             <article id="right-column">

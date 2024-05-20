@@ -1,18 +1,15 @@
 import { useLayoutStore } from '@/store/layoutStore';
+import { Button } from '@/ui/button';
+import { X } from 'lucide-react';
 
 export const ChatInfoSection = () => {
-    const layoutStore = useLayoutStore();
+    const { toggleRightColumn } = useLayoutStore((state) => state.actions);
 
     return (
         <section>
-            <button
-                className="px-5 py-2 bg-blue-400 rounded"
-                onClick={() => {
-                    layoutStore.toggleRightColumn();
-                }}
-            >
-                back
-            </button>
+            <Button size="icon" variant="ghost" onClick={toggleRightColumn}>
+                <X strokeWidth={1} />
+            </Button>
         </section>
     );
 };
