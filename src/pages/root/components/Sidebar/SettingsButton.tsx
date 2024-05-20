@@ -9,15 +9,11 @@ export const SettingsButton = memo(() => {
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        className="rounded-full size-10 hover:bg-neutral-100 active:rounded-xl active:bg-neutral-200"
-                        size="icon"
-                    >
+                    <Button variant="ghost" className="rounded-full active:rounded-xl " size="icon">
                         <SettingsIcon strokeWidth={1} />
                     </Button>
                 </TooltipTrigger>
-                <TooltipContent className="bg-white">
+                <TooltipContent>
                     <p>Open Settings</p>
                 </TooltipContent>
             </Tooltip>

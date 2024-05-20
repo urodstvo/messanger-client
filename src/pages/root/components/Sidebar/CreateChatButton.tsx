@@ -9,11 +9,7 @@ export const CreateChatButton = memo(() => {
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        className="rounded-full size-10 hover:bg-neutral-100 active:rounded-xl active:bg-neutral-200"
-                        size="icon"
-                    >
+                    <Button variant="ghost" className="rounded-full active:rounded-xl" size="icon">
                         <PencilIcon strokeWidth={1} />
                     </Button>
                 </TooltipTrigger>

@@ -123,7 +123,7 @@ html {
         }
 
         & > #left-column {
-            @apply row-start-1 col-start-1 p-[--page-padding-small] bg-white border w-full flex overflow-hidden transition-all min-w-0;
+            @apply row-start-1 col-start-1 p-[--page-padding-small] bg-white border w-full flex transition-all min-w-0;
 
             @media screen(sm) {
                 & {
@@ -139,7 +139,7 @@ html {
         }
 
         & > #middle-column {
-            @apply row-start-1 col-start-1 p-[--page-padding-small] bg-zinc-100 border z-[1] flex overflow-hidden transition-all w-full max-w-[--middle-column-max-width];
+            @apply row-start-1 col-start-1 p-[--page-padding-small] bg-zinc-100 border z-[1] flex transition-all w-full max-w-[--middle-column-max-width];
 
             @media screen(sm) {
                 & {
