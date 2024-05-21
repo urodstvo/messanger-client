@@ -19,6 +19,9 @@
 
     --input: 214.3 31.8% 91.4%;
 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
@@ -95,6 +98,12 @@ html {
                         @apply translate-x-[--right-column-translate];
                     }
                 }
+
+                &.right-column-shown {
+                    & > #right-column {
+                        @apply shadow-[-100px_0_100px_rgba(0,0,0,0.1)];
+                    }
+                }
             }
         }
 
@@ -153,13 +162,13 @@ html {
 
             @media screen(sm) {
                 & {
-                    @apply absolute end-0 min-h-full max-h-full h-full shadow-[-100px_0_100px_rgba(0,0,0,0.1)];
+                    @apply absolute end-0 min-h-full max-h-full h-full;
                 }
             }
 
             @media screen(xl) {
                 & {
-                    @apply shadow-none;
+                    @apply !shadow-none;
                 }
             }
         }

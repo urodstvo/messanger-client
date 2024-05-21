@@ -93,9 +93,9 @@ export const RootLayout = () => {
             <aside id="left-column">
                 <Sidebar />
             </aside>
-            <main id="middle-column" className="relative">
+            <main id="middle-column" className="relative ">
                 {isTablet && (isLeftColumnShown || isRightColumnShown) && (
-                    <div className="absolute inset-0 z-10" onClick={onSelectMiddleColumn} />
+                    <div className="absolute inset-0 z-[100]" onClick={onSelectMiddleColumn} />
                 )}
                 <Outlet />
             </main>

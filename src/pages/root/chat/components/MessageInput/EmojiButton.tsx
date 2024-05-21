@@ -1,18 +1,18 @@
 import { Button } from '@/ui/button';
 import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from '@/ui/tooltip';
-import { Paperclip } from 'lucide-react';
+import { Smile } from 'lucide-react';
 
-export const FileAttachmentButton = () => {
+export const EmojiButton = () => {
     return (
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button variant="ghost" size="icon" className="rounded-full  active:rounded-xl ">
-                        <Paperclip strokeWidth={1} />
+                    <Button variant="ghost" size="icon" className="rounded-full active:rounded-xl">
+                        <Smile strokeWidth={1} size={24} />
                     </Button>
                 </TooltipTrigger>
                 <TooltipContent className="bg-white">
-                    <p>Attach File</p>
+                    <p>Add Emoji</p>
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>

@@ -1,0 +1,48 @@
+{
+    "messages": [
+        {
+            "id": 1,
+            "text": "Hello",
+            "author": {
+                "id": 1,
+                "name": "John",
+                "avatar": "https://via.placeholder.com/150"
+            },
+            "date": 1716297117,
+            "status": "readed"
+        },
+        {
+            "id": 2,
+            "text": "Hi",
+            "author": {
+                "id": 2,
+                "name": "Jane",
+                "avatar": "https://via.placeholder.com/151"
+            },
+            "date": 1716297118,
+            "status": "readed"
+        },
+        {
+            "id": 3,
+            "text": "How are you? ",
+            "author": {
+                "id": 1,
+                "name": "John",
+                "avatar": "https://via.placeholder.com/150"
+            },
+            "date": 1716297197,
+            "status": "readed"
+        },
+        {
+            "id": 4,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eros velit, scelerisque ut sapien in, finibus condimentum erat. Phasellus tellus nisi, vestibulum a imperdiet vitae, dictum vitae turpis. Donec finibus vel leo non finibus. Fusce tortor mi, aliquet sed luctus et, semper id tortor. Donec at vulputate urna. Etiam tempor ac elit tempus vulputate. Ut eget convallis nisi. Phasellus et odio velit. Fusce eget sodales lacus.\nDonec non ultrices lectus. Integer elementum, velit ut luctus ultricies, nibh eros molestie ante, sed maximus nunc risus sed nunc. Fusce laoreet eros ipsum, vel malesuada orci feugiat vel. Morbi euismod vehicula sodales. Praesent est ligula, facilisis a neque quis, efficitur egestas urna. Mauris tempus libero felis, id tristique ligula dictum sed. Nulla ultricies et neque et sagittis. Sed condimentum risus id nunc convallis, a pulvinar nisi consectetur.",
+            "author": {
+                "id": 2,
+                "name": "Jane",
+                "avatar": "https://via.placeholder.com/151"
+            },
+            "date": 1716297217,
+            "status": "readed"
+        }
+    ]
+}

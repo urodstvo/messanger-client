@@ -7,11 +7,7 @@ export const SendMessageButton = () => {
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="rounded-full hover:bg-neutral-100 active:rounded-xl active:bg-neutral-200"
-                    >
+                    <Button variant="ghost" size="icon" className="rounded-full  active:rounded-xl">
                         <Send strokeWidth={1} />
                     </Button>
                 </TooltipTrigger>
