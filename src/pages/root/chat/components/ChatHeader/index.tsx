@@ -6,7 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/ui/avatar';
 
 import { useMediaQuery } from '@/lib/hooks';
 import { useLayoutStore } from '@/store/layoutStore';
-
 export const ChatHeader = () => {
     const { toggleLeftColumn, toggleMiddleColumn, toggleRightColumn } = useLayoutStore((state) => state.actions);
 

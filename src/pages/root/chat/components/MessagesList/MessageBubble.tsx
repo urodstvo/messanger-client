@@ -31,7 +31,7 @@ export const MessageBubble = (props: MessageBubbleProps) => {
                 'justify-end xl:justify-start': props.isMine,
             })}
         >
-            <Avatar className="hidden sticky bottom-0 xl:block">
+            <Avatar className="hidden sticky bottom-0 xl:flex">
                 <AvatarImage src={props.author.avatar} alt={props.author.name} />
                 <AvatarFallback>{props.author.name[0]}</AvatarFallback>
             </Avatar>
@@ -51,8 +51,8 @@ export const MessageBubble = (props: MessageBubbleProps) => {
                 )}
             >
                 <div className="max-w-[300px] xl:max-w-[600px]">
-                    {props.message.split('\n').map((line) => (
-                        <p>{line}</p>
+                    {props.message.split('\n').map((line, ind) => (
+                        <p key={ind}>{line}</p>
                     ))}
                 </div>
                 <div className="text-sm text-muted-foreground">{formatDate(props.date)}</div>
