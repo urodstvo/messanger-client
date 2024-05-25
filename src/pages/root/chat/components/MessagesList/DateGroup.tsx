@@ -2,7 +2,7 @@ import { Badge } from '@/ui/badge';
 
 import { MessageBubble } from './MessageBubble';
 
-import mock from './mock.json';
+import type { State as ChatsState } from '@/store/chatsStore';
 
 const formatDate = (date: Date) => {
     const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -16,6 +16,7 @@ const formatDate = (date: Date) => {
 };
 
 type DateGroupProps = {
+    messages: ChatsState['chatsList'][number]['history'];
     date: Date;
 };
 
@@ -27,7 +28,7 @@ export const DateGroup = (props: DateGroupProps) => {
             <header className="flex justify-center">
                 <Badge variant="outline">{formatDate(props.date)}</Badge>
             </header>
-            {mock.messages.map((message) => (
+            {props.messages.map((message) => (
                 <MessageBubble
                     key={message.id}
                     author={message.author}

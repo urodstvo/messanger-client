@@ -1,25 +1,23 @@
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
 import { RootError, RootPage, RootLayout } from '@/pages/root';
 import { LoginPage } from '@/pages/auth/login';
 import { RegisterPage } from '@/pages/auth/register';
 import { ChatPage } from './pages/root/chat';
 
-const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
+const checkIsAuthenticated = () => {
     const isAuthenticated = true;
 
-    if (isAuthenticated) return children;
-
-    return <Navigate to="/auth/login" />;
+    if (!isAuthenticated) {
+        return redirect('/auth/login');
+    }
+    return null;
 };
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: (
-            <PrivateRoute>
-                <RootLayout />
-            </PrivateRoute>
-        ),
+        loader: checkIsAuthenticated,
+        element: <RootLayout />,
         errorElement: <RootError />,
         children: [
             {

@@ -1,8 +1,11 @@
-import { Button } from '@/ui/button';
-import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from '@/ui/tooltip';
+import { memo } from 'react';
+
 import { Smile } from 'lucide-react';
 
-export const EmojiButton = () => {
+import { Button } from '@/ui/button';
+import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from '@/ui/tooltip';
+
+export const EmojiButton = memo(() => {
     return (
         <TooltipProvider>
             <Tooltip>
@@ -17,4 +20,4 @@ export const EmojiButton = () => {
             </Tooltip>
         </TooltipProvider>
     );
-};
+});

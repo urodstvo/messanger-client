@@ -8,7 +8,7 @@ export const RootPage = () => {
 
     return (
         <div
-            className={clsx('flex flex-col py-10  w-full', {
+            className={clsx('flex flex-col py-10 w-full', {
                 'items-start px-5': isTablet,
                 'items-center ': !isTablet,
             })}

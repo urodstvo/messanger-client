@@ -1,31 +1,25 @@
 import clsx from 'clsx';
 
 import { Input } from '@/ui/input';
-import { useLayoutStore } from '@/store/layoutStore';
 
-import { useMediaQuery } from '@/lib/hooks';
 import { SettingsButton } from './SettingsButton';
 import { CreateChatButton } from './CreateChatButton';
 import { SearchButton } from './SearchButton';
 import { ChatList } from './ChatList';
+import { useCompact } from '@/lib/hooks/useCompact';
 
 export const Sidebar = () => {
-    const isLeftColumnShown = useLayoutStore((state) => state.isLeftColumnShown);
-    const isTablet = useMediaQuery('(min-width: 640px) and (max-width: 1023px)');
+    const isCompact = useCompact();
 
     return (
         <div className="flex flex-col gap-1 w-full ">
             <section className="w-full">
                 <div
                     className={clsx('flex gap-1', {
-                        'flex-col items-center': isTablet && !isLeftColumnShown,
+                        'flex-col items-center': isCompact,
                     })}
                 >
-                    {!(isTablet && !isLeftColumnShown) ? (
-                        <Input placeholder="Search" className="rounded flex-1" />
-                    ) : (
-                        <SearchButton />
-                    )}
+                    {!isCompact ? <Input placeholder="Search" className="rounded flex-1" /> : <SearchButton />}
                     <CreateChatButton />
                     <SettingsButton />
                 </div>

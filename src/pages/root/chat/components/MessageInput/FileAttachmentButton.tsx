@@ -1,8 +1,11 @@
-import { Button } from '@/ui/button';
-import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from '@/ui/tooltip';
+import { memo } from 'react';
+
 import { Paperclip } from 'lucide-react';
 
-export const FileAttachmentButton = () => {
+import { Button } from '@/ui/button';
+import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from '@/ui/tooltip';
+
+export const FileAttachmentButton = memo(() => {
     return (
         <TooltipProvider>
             <Tooltip>
@@ -17,4 +20,4 @@ export const FileAttachmentButton = () => {
             </Tooltip>
         </TooltipProvider>
     );
-};
+});

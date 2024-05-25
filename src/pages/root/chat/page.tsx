@@ -16,7 +16,7 @@ export const ChatPage = () => {
     useLayoutEffect(() => {
         const element = listRef.current as HTMLDivElement;
         element.scrollTo(0, element.scrollHeight);
-    }, []);
+    }, [params.chatId]);
 
     return (
         <div className="flex flex-col gap-1 w-full relative no-scrollbar overflow-y-auto" ref={listRef}>

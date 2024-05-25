@@ -41,11 +41,11 @@ export const MessageBubble = (props: MessageBubbleProps) => {
                     'before:absolute before:content-[" "]  before:bottom-0 before:z-[-2] before:size-4 ',
                     'after:absolute after:content-[" "]  after:bottom-0 after:z-[-1] after:size-4 after:bg-neutral-100 ',
                     {
-                        'before:-left-4 after:-left-4 after:rounded-br-full rounded-bl-none  bg-neutral-200 before:bg-neutral-200':
+                        'before:-left-4 after:-left-4 after:rounded-br-full rounded-bl-none bg-neutral-200 before:bg-neutral-200':
                             !props.isMine,
                         'before:-right-4 after:-right-4 after:rounded-bl-full rounded-br-none xl:before:-left-4 xl:after:-left-4 xl:after:rounded-br-full xl:after:rounded-bl-none xl:rounded-bl-none xl:rounded-br-lg bg-slate-200 before:bg-slate-200':
                             props.isMine,
-                        'border-b-2 border-b-slate-400 before:border-b-2 before:border-b-slate-400 before:-bottom-[2px] bg-slate-300 before:bg-slate-300':
+                        'border-b-2 border-b-slate-400 before:border-b-2 before:border-b-slate-400 before:!bottom-[-2px] bg-slate-300 before:bg-slate-300':
                             props.status === 'delievered',
                     },
                 )}

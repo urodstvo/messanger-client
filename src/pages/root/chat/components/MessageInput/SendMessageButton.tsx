@@ -1,8 +1,11 @@
-import { Button } from '@/ui/button';
-import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from '@/ui/tooltip';
+import { memo } from 'react';
+
 import { Send } from 'lucide-react';
 
-export const SendMessageButton = () => {
+import { Button } from '@/ui/button';
+import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from '@/ui/tooltip';
+
+export const SendMessageButton = memo(() => {
     return (
         <TooltipProvider>
             <Tooltip>
@@ -17,4 +20,4 @@ export const SendMessageButton = () => {
             </Tooltip>
         </TooltipProvider>
     );
-};
+});
