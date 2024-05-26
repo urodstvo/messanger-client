@@ -1,14 +1,16 @@
+import { memo } from 'react';
 import clsx from 'clsx';
 
 import { Input } from '@/ui/input';
+
+import { useCompact } from '@/lib/hooks/useCompact';
 
 import { SettingsButton } from './SettingsButton';
 import { CreateChatButton } from './CreateChatButton';
 import { SearchButton } from './SearchButton';
 import { ChatList } from './ChatList';
-import { useCompact } from '@/lib/hooks/useCompact';
 
-export const Sidebar = () => {
+export const Sidebar = memo(() => {
     const isCompact = useCompact();
 
     return (
@@ -30,4 +32,4 @@ export const Sidebar = () => {
             </section>
         </div>
     );
-};
+});

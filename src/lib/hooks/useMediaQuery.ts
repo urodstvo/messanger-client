@@ -25,7 +25,7 @@ export const useMediaQuery = (query: string) => {
         return () => {
             mediaQueryList.removeEventListener('change', handleChange);
         };
-    }, [query]);
+    }, []);
 
     return matches;
 };
