@@ -1,4 +1,5 @@
-import { create } from 'zustand';
+import isEqual from 'lodash.isequal';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 export type State = {
     chatsList: Array<{
@@ -45,7 +46,6 @@ const initialState: State = {
             name: 'Chat 2',
             avatar: 'https://i.pravatar.cc/301',
             isPrivate: false,
-
             history: [
                 {
                     id: 465161,
@@ -107,13 +107,16 @@ const initialState: State = {
     ],
 };
 
-export const useChatsStore = create<State & Actions>((set, get) => ({
-    ...initialState,
-    actions: {
-        setChatsList: (chatsList: State['chatsList']) => set({ chatsList }),
-        setMessageInput: (messageInput: string, id: number) => {
-            const newChatsList = get().chatsList.map((chat) => (chat.id === id ? { ...chat, messageInput } : chat));
-            set({ chatsList: newChatsList });
+export const useChatsStore = createWithEqualityFn<State & Actions>(
+    (set, get) => ({
+        ...initialState,
+        actions: {
+            setChatsList: (chatsList: State['chatsList']) => set({ chatsList }),
+            setMessageInput: (messageInput: string, id: number) => {
+                const newChatsList = get().chatsList.map((chat) => (chat.id === id ? { ...chat, messageInput } : chat));
+                set({ chatsList: newChatsList });
+            },
         },
-    },
-}));
+    }),
+    isEqual,
+);

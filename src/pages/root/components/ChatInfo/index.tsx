@@ -2,6 +2,7 @@ import { useLayoutStore } from '@/store/layoutStore';
 import { Avatar, AvatarFallback, AvatarImage } from '@/ui/avatar';
 import { Button } from '@/ui/button';
 import { BadgeMinus, Info, Trash, X } from 'lucide-react';
+import { memo } from 'react';
 
 const chatInfo = {
     name: 'John Doe',
@@ -9,7 +10,7 @@ const chatInfo = {
     isPrivate: true,
 };
 
-export const ChatInfoSection = () => {
+export const ChatInfoSection = memo(() => {
     const { toggleRightColumn } = useLayoutStore((state) => state.actions);
 
     return (
@@ -45,4 +46,4 @@ export const ChatInfoSection = () => {
             </section>
         </div>
     );
-};
+});

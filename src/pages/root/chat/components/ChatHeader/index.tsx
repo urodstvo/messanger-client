@@ -6,6 +6,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/ui/avatar';
 
 import { useMediaQuery } from '@/lib/hooks';
 import { useLayoutStore } from '@/store/layoutStore';
+import { useParams } from 'react-router-dom';
+import { useCallback } from 'react';
+import { useChatsStore, type State as ChatsState } from '@/store/chatsStore';
 
 export const ChatHeader = () => {
     const { toggleLeftColumn, toggleMiddleColumn, toggleRightColumn } = useLayoutStore((state) => state.actions);
@@ -14,6 +17,24 @@ export const ChatHeader = () => {
     const isRightColumnShown = useLayoutStore((state) => state.isRightColumnShown);
 
     const isDesktop = useMediaQuery('(min-width: 1024px)');
+
+    const { chatId } = useParams();
+
+    const selector = useCallback(
+        (state: ChatsState) => {
+            const foundChat = state.chatsList.find((chat) => chat.id === Number(chatId as string));
+
+            if (!foundChat) return undefined;
+
+            return {
+                name: foundChat.name,
+                avatar: foundChat.avatar,
+            };
+        },
+        [chatId],
+    );
+
+    const chat = useChatsStore(selector);
 
     return (
         <header className={clsx('w-full sticky top-0 z-10 inset-x-0')}>
@@ -43,14 +64,11 @@ export const ChatHeader = () => {
                     onClick={toggleRightColumn}
                 >
                     <Avatar>
-                        <AvatarImage
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                            alt="Avatar"
-                        />
+                        <AvatarImage src={chat?.avatar} alt={chat?.name} />
                         <AvatarFallback>Chat</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                        <p>Chat #0</p>
+                        <p>{chat?.name}</p>
                         <span className="text-sm text-gray-500">Online</span>
                     </div>
                 </div>

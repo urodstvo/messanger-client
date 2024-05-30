@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { Input } from '@/ui/input';
 
-import { useCompact } from '@/lib/hooks/useCompact';
+import { useCompact } from '@/lib/hooks';
 
 import { SettingsButton } from './SettingsButton';
 import { CreateChatButton } from './CreateChatButton';
